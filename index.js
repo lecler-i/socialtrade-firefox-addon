@@ -2,16 +2,12 @@ var pageMod = require("sdk/page-mod");
 var buttons = require('sdk/ui/button/action');
 var tabs = require("sdk/tabs");
 
-
-//const Stately = require('stately.js');
 var button = buttons.ActionButton({
   id: "social-bot-link",
-  label: "Visit Mozilla",
-  icon: {
-    "16": "./icon-16.png",
-    "32": "./icon-32.png",
-    "64": "./icon-64.png"
-  },
+  label: "LOL Launch Social-Trade-Bot",
+  icon: "./icon.svg",
+  badge: 0,
+  badgeColor: "#00AAAA",
   onClick: handleClick
 });
 
@@ -22,7 +18,6 @@ var tabWorkers = [];
 
 function emitBlacklistUpdate(taskId){
 	tabWorkers.forEach((w) => { w.port.emit('blacklist-update', [].concat(tasksBlacklist, tasksDone, tasksInProgress)); });
-	//tabWorkers.forEach((w) => { w.port.emit('blacklist-update', taskId );});
 }
 
 function handleClick(state) {
@@ -36,10 +31,10 @@ function handleClick(state) {
 			tabWorkers.push(worker);
 			worker.port.emit('blacklist-update', [].concat(tasksBlacklist, tasksDone, tasksInProgress));
 			worker.port.on('task-finish', (taskId) => {
-				console.log('Receive : ', 'task-finish', taskId);
 				tasksInProgress = tasksInProgress.filter((e) => e != taskId);
 	      		tasksDone.push(taskId);
 	      		emitBlacklistUpdate(taskId);
+	      		button.badge++;
 	    	});
 	    	worker.port.on('task-blacklist', (taskId) => {
 	      		tasksBlacklist.push(taskId);
@@ -56,17 +51,3 @@ function handleClick(state) {
 	    }
 	});
 }
-
-
-
-
-
-// self.port.on("myAddonMessage", function(myAddonMessagePayload) {
-//   // Handle the message
-// });
-
-// pageMod.PageMod({
-//   include: "*.biz",
-//   contentScriptFile: [require.resolve("stately"), "./script.js"]
-// });
-

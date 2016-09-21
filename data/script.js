@@ -7,14 +7,10 @@
 
 $(document).ready(() => {
 	let cmdGetWork = $('#ctl00_ContentPlaceHolder1_cmdGetWork');
-
-
 	window.console.error(cmdGetWork);
-	if (cmdGetWork){
+ 	if (cmdGetWork){
 		cmdGetWork.click();
-	}	
-    window.alert(self.data.url('style.css'));
-
+	}
 });
 
 let blacklist = [];
