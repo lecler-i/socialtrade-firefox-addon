@@ -9,15 +9,15 @@ before_install:
 
 install:
   - "npm install"
-  - "npm run build:bower"
+  - "npm run install:bower"
 
 script:
   - "npm test"
-  - "npm run build"
 
 before_deploy:
-  - "jpm sign --api-key ${JPM_API_KEY} --api-secret ${JPM_API_SECRET} --xpi socialtrade-firefox-addon.xpi"
-  - "export SIGNED_XPI=$(ls socialtrade_bot*.xpi)"
+  - "cp manifest.json script.js toggles.css icon.svg build"
+  - "npm run build:firefox"
+  - "export SIGNED_XPI=$(ls web-ext-artifacts/socialtrade_bot*.xpi)"
 
 deploy:
   - provider: releases

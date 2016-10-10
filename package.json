@@ -12,8 +12,8 @@
   "scripts": {
     "test": "echo 'No tests yet :('",
     "dev": "jpm watchpost",
-    "build:bower": "bower install && bower-installer",
-    "build": "jpm xpi"
+    "install:bower": "bower install && bower-installer",
+    "build:firefox": "web-ext sign --api-key ${JPM_API_KEY} --api-secret ${JPM_API_SECRET} -s build/"
   },
   "license": "MIT",
   "keywords": [
@@ -22,7 +22,7 @@
   "devDependencies": {
     "bower": "^1.7.9",
     "bower-installer": "^1.2.0",
-    "jpm": "^1.1.4"
+    "web-ext": "^1.5.0"
   },
   "dependencies": {}
 }

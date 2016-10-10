@@ -1,23 +1,18 @@
-// $(document).arrive(".test-elem", function() {
-//     // 'this' refers to the newly created element
-//     var $newElem = $(this);
-// });
-
-
+alert('Bot is activated.');
 
 $(document).ready(() => {
 	let cmdGetWork = $('#ctl00_ContentPlaceHolder1_cmdGetWork');
-	window.console.error(cmdGetWork);
+	console.log(cmdGetWork);
  	if (cmdGetWork){
 		cmdGetWork.click();
 	}
 });
 
-let blacklist = [];
-self.port.on('blacklist-update', (data) => {
-	blacklist = data;
-	console.error('Blacklist updated !', blacklist);
+$('div .home-title > h1').html('<div class="toggle toggle-light"></div>');
+$('div .home-title > h1 .toggle').toggles({
+  on: false
 });
+var myToggle = $('.toggle').data('toggles');
 
 let fsm = new Stately.machine({
     'LOAD': {
@@ -30,7 +25,7 @@ let fsm = new Stately.machine({
     	execute: function () {
 			let done = this.rows.every((elt, idx) => {
     			let status = $(elt.cells[2]).find('b').text();
-				if (status === 'Pending' && idx != this.currentTask && !blacklist.includes(idx)){
+				if (status === 'Pending' && idx != this.currentTask){
 					//self.port.emit('task-in-progress', idx);
 					this.currentTask = idx;
 					return false;
@@ -60,7 +55,6 @@ let fsm = new Stately.machine({
     'WAIT_TASK_FINISH':{
     	execute: function (arg) {
     		let status = $(this.rows[this.currentTask].cells[2]).children('span').text();
-    		console.error(status, this.currentTask);
     		if (status === 'clicked')
 				return this.TASK_FINISH;
 			return this.WAIT_TASK_FINISH;
@@ -69,7 +63,7 @@ let fsm = new Stately.machine({
     'TASK_FINISH':{
     	execute: function (arg) {
             $(this.rows[this.currentTask]).css('background-color', '#259b24aa');
-    		self.port.emit('task-finish', this.currentTask);
+    		//self.port.emit('task-finish', this.currentTask);
     		return this.PICK_TASK;
 		}
     },
@@ -85,12 +79,10 @@ let fsm = new Stately.machine({
     //console.error(event, oldState, newState);
 });
 
-
-
 let data = null;
 setTimeout(function loopsyloop() {
 	let PanelAssignMEnt = $('#dvCustomers > tr');
-    if (PanelAssignMEnt)
+    if (PanelAssignMEnt && myToggle.active)
     	data = fsm.execute(data);
     setTimeout(loopsyloop, 500);
 }, 3000);

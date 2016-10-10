@@ -1,0 +1,16 @@
+{
+  "description": "Social Trade Bot",
+  "manifest_version": 2,
+  "name": "socialtrade-bot",
+  "version": "1.2",
+  "content_scripts": [
+    {
+      "matches": ["https://socialtrade.biz/User/TodayTask*"],
+      "js": ["./libs/jquery/jquery.js", "./libs/jquery-toggles/toggles.min.js", "./libs/arrive/arrive.js", "./libs/Stately.js/Stately.js", "./script.js"],
+      "css": ["./toggles.css"]
+
+    }
+  ]
+
+
+}
