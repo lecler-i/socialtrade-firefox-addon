@@ -2,7 +2,7 @@
   "description": "Social Trade Bot",
   "manifest_version": 2,
   "name": "socialtrade-bot",
-  "version": "1.2",
+  "version": "1.2.0",
   "content_scripts": [
     {
       "matches": ["https://socialtrade.biz/User/TodayTask*"],
