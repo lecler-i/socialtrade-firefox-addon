@@ -25,25 +25,16 @@ function handleClick(state) {
   		url: 'https://www.socialtrade.biz/User/TodayTask.aspx',
 	  	onReady: (tab) => {
 	  		var worker = tab.attach({
-				contentScriptFile: ["./libs/jquery/jquery.js", "./libs/arrive/arrive.js", "./libs/Stately.js/Stately.js", "./script.js", './style.css'],
+				contentScriptFile: ["./libs/jquery/jquery.js", "./libs/arrive/arrive.js", "./libs/Stately.js/Stately.js", "./script.js"],
 			    contentScriptWhen: 'end',
 			});
 			tabWorkers.push(worker);
-			worker.port.emit('blacklist-update', [].concat(tasksBlacklist, tasksDone, tasksInProgress));
+			//worker.port.emit('blacklist-update', [].concat(tasksBlacklist, tasksDone, tasksInProgress));
 			worker.port.on('task-finish', (taskId) => {
 				tasksInProgress = tasksInProgress.filter((e) => e != taskId);
 	      		tasksDone.push(taskId);
 	      		emitBlacklistUpdate(taskId);
 	      		button.badge++;
-	    	});
-	    	worker.port.on('task-blacklist', (taskId) => {
-	      		tasksBlacklist.push(taskId);
-	      		emitBlacklistUpdate(taskId);
-	    	});
-	    	worker.port.on('task-in-progress', (taskId) => {
-				console.log('Receive : ', 'task-finish', taskId);
-	      		tasksInProgress.push(taskId);
-	      		emitBlacklistUpdate(taskId);
 	    	});
 	    	worker.port.on('finish-all', () => {
 	    		tab.close();

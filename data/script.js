@@ -14,7 +14,6 @@ $(document).ready(() => {
 });
 
 let blacklist = [];
-// self.port.emit("loaded", 'DANSTAFACE');
 self.port.on('blacklist-update', (data) => {
 	blacklist = data;
 	console.error('Blacklist updated !', blacklist);
@@ -32,7 +31,7 @@ let fsm = new Stately.machine({
 			let done = this.rows.every((elt, idx) => {
     			let status = $(elt.cells[2]).find('b').text();
 				if (status === 'Pending' && idx != this.currentTask && !blacklist.includes(idx)){
-					self.port.emit('task-in-progress', idx);
+					//self.port.emit('task-in-progress', idx);
 					this.currentTask = idx;
 					return false;
 				}
@@ -46,7 +45,7 @@ let fsm = new Stately.machine({
     		let action = $($(this.rows[this.currentTask].cells[3]).find('span')[0]);
 			if (action) 
 				return [this.CLICK_NORMAL_TASK, action];
-			self.port.emit('task-blacklist', this.currentTask);
+			//self.port.emit('task-blacklist', this.currentTask);
             $(this.rows[this.currentTask]).css('background-color', '#e51c23aa');
 			return this.PICK_TASK;
     	}
@@ -90,8 +89,8 @@ let fsm = new Stately.machine({
 
 let data = null;
 setTimeout(function loopsyloop() {
-	let PanelAssignMEnt = $('#ctl00_ContentPlaceHolder1_PanelAssignMEnt');
+	let PanelAssignMEnt = $('#dvCustomers > tr');
     if (PanelAssignMEnt)
     	data = fsm.execute(data);
-    setTimeout(loopsyloop, 1000);
+    setTimeout(loopsyloop, 500);
 }, 3000);

@@ -1,0 +1,9 @@
+.*
+*
+!/data/**
+!/package.json
+!/bootstrap.js
+!/install.rdf
+!/index.js
+*~
+\#*

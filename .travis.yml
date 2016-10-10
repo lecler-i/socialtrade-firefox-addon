@@ -1,0 +1,29 @@
+sudo: false
+language: "node_js"
+node_js:
+  - "6"
+
+before_install:
+  - "node --version"
+  - "npm config set spin false"
+
+install:
+  - "npm install"
+  - "npm run build:bower"
+
+script:
+  - "npm test"
+  - "npm run build"
+
+before_deploy:
+  - "jpm sign --api-key ${JPM_API_KEY} --api-secret ${JPM_API_SECRET} --xpi socialtrade-firefox-addon.xpi"
+  - "export SIGNED_XPI=$(ls socialtrade_bot*.xpi)"
+
+deploy:
+  - provider: releases
+    api_key:
+      secure: "xO1r1hmwGYRqtxmx4Yvs3cFkU5UrULDc1vSIzR84jimJLRE4FhF3cPZtKJQ1llq1rO44w4b8fIApBbsStl7WZS3mrQcSpA20ZSj57r/XFtJ1wakX4HirCAkBPabp+nIgLAuLA9LkL27YxuDWDw19MmFvO0xvWwAtUbfSSvSes6Ud8hDx5tHWPfkuHW8ZJhKW+hZ3qqGgLhCf9dR+xAINJXK1HUQlzsSly7lKaML7XSbbqf9E3jBoRP1wKxmP7ER27gx995Is30bHaWl4iUHAnYuukqbNq6+wcc2AxSKaWYM7NeYfa0H3PtVPTHvN/8DdG29TV+mQRZYz+OOienc5LVytYRoaE0/6a2PmRv1Jl2FAEgVxV0FQCXRHdh95Pj6nYy78WfwRhnM+cwYi1h3cqQpwpYI9OhOKbtkQu7NAEM6cSwsSDdmHXxL/PgmJ3m1FiyvAZz1wUUFG1+qhPJ//evbKv4lzxlvQdDrWYvRoes0uMW5XB4nvKf81umBpqa50sygO1O+B36+EvOZoVeqNz9YfsC3UcJb6Gl7nC1ZZm23n9O4svJBCQeXSrpo1NbjvYNUMgk++jN0e0aBpfD1jhdG9LYuJ5viaou3d0fxuDrOKjgx//csTaP8Gjdr9cNBO89py0iDyEFhRtqDhQthsbU9gmrR/dy8VZQx6LWJjAx8="
+    file: "${SIGNED_XPI}"
+    skip_cleanup: true
+    on:
+      tags: true

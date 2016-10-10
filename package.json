@@ -1,7 +1,7 @@
 {
   "title": "SocialTrade Bot",
   "name": "socialtrade-firefox-addon",
-  "version": "0.0.4",
+  "version": "0.0.8",
   "description": "For lazy socialtrade.biz users",
   "main": "index.js",
   "author": "Thomas LECLERCQ",
@@ -10,12 +10,10 @@
     "fennec": ">=38.0a1"
   },
   "scripts": {
+    "test": "echo 'No tests yet :('",
     "dev": "jpm watchpost",
-    "install": "npm run install:npm && npm run install:bower",
-    "install:npm": "npm install",
-    "install:bower": "bower install",
-    "build:bower": "bower-installer",
-    "build": "npm run build:bower && jpm xpi"
+    "build:bower": "bower install && bower-installer",
+    "build": "jpm xpi"
   },
   "license": "MIT",
   "keywords": [
