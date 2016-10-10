@@ -17,13 +17,18 @@ script:
 before_deploy:
   - "cp manifest.json script.js toggles.css icon.svg build"
   - "npm run build:firefox"
-  - "export SIGNED_XPI=$(ls web-ext-artifacts/socialtrade_bot*.xpi)"
+  - "export FIREFOX_EXTENSION=$(ls web-ext-artifacts/socialtrade*.xpi)"
+
+  - "npm run build:chrome"
+  - "export CHROME_EXTENSION=$(ls web-ext-artifacts/socialtrade*.crx)"
 
 deploy:
   - provider: releases
     api_key:
       secure: "sQeKgeeGzOo/2xW6h4pqUg/qLQkiyVsJRF0jG7AlhAE3YLjTUMJ/0G0w324XvQSH+VrOFtdbg9UkF4sknazn0W8NdMUXHX/auoFfyJr5Rllsw0wCcB8n9ZxBi+PejJpnWrv/Sm1xEQMoXTPQgHHewtEaguhTI7JtE0cLZlEwr8uEJ7hoTS0pSCRnqmXxOvs/S5tv9GP1NW6ZCCuEF3OUf7u3wVB4GqlhR009/UngQFtGfYPiBfvLex9ZMzWOByxXk7iUOIMtSeislDKn+IRsLojzorGtNFZ86+8xj5oAVEwOsO+NHdwTINoVntcq1abGMujqyWarIBo/6P0GZ79Jyf0aM8qNs7u2bW24P9iFfmnxCDDygWMAjbAi8J/ZUBekPiAy+Mqh42mtV1lR8zwLKsy1HJClFIuO+miCKwR4FQ9vEL3aumRSKrOTIwwvlq4nMySkWOP/O8I7P+uTA49BHruFJgSI+POGtctpw3uExVVzkKe+p+ClqYejBAkJvuv9twliO/5tQcNWhIPhnSuk7aSLRfXuUs4tFeb+lzCOQXTAtqmCqkNoR+pptXrNdz24HuBhr5QrA7zTQJPtAoLc5dAHgiSfmG91iMX2KQfZh3sv182cfqkRgn9WNMChmpIg2cM2kOQ/+eVuGNgACY02wNYrHnSL1HXDt7o/BAVRozg="
-    file: "${SIGNED_XPI}"
+    file: 
+      - "${CHROME_EXTENSION}"
+      - "${FIREFOX_EXTENSION}"
     skip_cleanup: true
     on:
       tags: true
