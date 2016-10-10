@@ -1,7 +1,7 @@
 {
   "title": "SocialTrade Bot",
   "name": "socialtrade-firefox-addon",
-  "version": "0.0.8",
+  "version": "1.0.0",
   "description": "For lazy socialtrade.biz users",
   "main": "index.js",
   "author": "Thomas LECLERCQ",
