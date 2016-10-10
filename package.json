@@ -4,7 +4,7 @@
     "dev": "jpm watchpost",
     "install:bower": "bower install && bower-installer",
     "build:firefox": "web-ext sign --api-key ${JPM_API_KEY} --api-secret ${JPM_API_SECRET} -s build/",
-    "build:chrome": "web-ext build -s build/ && for file in web-ext-artifacts/*.zip; do mv $file \"${file%.zip}.crx\" ; done"
+    "build:chrome": "web-ext build -s build/ && for file in web-ext-artifacts/*.zip"
   },
   "devDependencies": {
     "bower": "^1.7.9",

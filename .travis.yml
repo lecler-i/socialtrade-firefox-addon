@@ -20,7 +20,7 @@ before_deploy:
   - "export FIREFOX_EXTENSION=$(ls web-ext-artifacts/socialtrade*.xpi)"
 
   - "npm run build:chrome"
-  - "export CHROME_EXTENSION=$(ls web-ext-artifacts/socialtrade*.crx)"
+  - "export CHROME_EXTENSION=$(ls web-ext-artifacts/socialtrade*.zip)"
 
 deploy:
   - provider: releases
