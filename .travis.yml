@@ -19,7 +19,7 @@ before_deploy:
   - "npm run build"
   - "export EXTENSION_ZIP=$(ls web-ext-artifacts/socialtrade*.zip)"
 
-  - "npm run build:firefox"
+  - "npm run publish:firefox"
   - "export FIREFOX_EXTENSION=$(ls web-ext-artifacts/socialtrade*.xpi)"
 
   - "npm run publish:chrome"
