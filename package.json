@@ -6,7 +6,7 @@
     "build": "web-ext build -s build/",
     "publish:firefox": "web-ext sign --api-key ${FIREFOX_API_KEY} --api-secret ${FIREFOX_API_SECRET} -s build/",
     "publish:chrome": "webstore upload --source $(ls web-ext-artifacts/socialtrade*.zip) --extension-id ${CHROME_APP_ID} --client-id ${CHROME_CLIENT_ID} --client-secret ${CHROME_CLIENT_SECRET} --refresh-token ${CHROME_REFRESH_TOKEN}",
-    "crx:download": "wget \"https://clients2.google.com/service/update2/crx?response=redirect&prodversion=38.0&x=id%3D${CHROME_APP_ID}%26installsource%3Dondemand%26uc\" -O ${EXTENSION_ZIP/%zip/crx}"
+    "crx:download": "wget \"https://clients2.google.com/service/update2/crx?response=redirect&prodversion=38.0&x=id%3D${CHROME_APP_ID}%26installsource%3Dondemand%26uc\" -O ${EXTENSION_ZIP/%.zip}.crx"
   },
   "devDependencies": {
     "bower": "^1.7.9",
