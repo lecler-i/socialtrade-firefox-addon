@@ -11,7 +11,7 @@
   "devDependencies": {
     "bower": "^1.7.9",
     "bower-installer": "^1.2.0",
-    "chrome-webstore-manager": "^0.4.0",
+    "chrome-webstore-upload-cli": "^1.1.0",
     "web-ext": "^1.5.0"
   },
   "dependencies": {}
