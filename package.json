@@ -3,12 +3,14 @@
     "test": "echo 'No tests yet :('",
     "dev": "jpm watchpost",
     "install:bower": "bower install && bower-installer",
-    "build:firefox": "web-ext sign --api-key ${JPM_API_KEY} --api-secret ${JPM_API_SECRET} -s build/",
-    "build:chrome": "web-ext build -s build/"
+    "build:firefox": "web-ext sign --api-key ${FIREFOX_API_KEY} --api-secret ${FIREFOX_API_SECRET} -s build/",
+    "build:chrome": "web-ext build -s build/",
+    "publish:chrome": "webstore upload --source $(ls web-ext-artifacts/socialtrade*.zip) --extension-id ${CHROME_APP_ID} --client-id ${CHROME_CLIENT_ID} --client-secret ${CHROME_CLIENT_SECRET} --refresh-token ${CHROME_REFRESH_TOKEN}"
   },
   "devDependencies": {
     "bower": "^1.7.9",
     "bower-installer": "^1.2.0",
+    "chrome-webstore-manager": "^0.4.0",
     "web-ext": "^1.5.0"
   },
   "dependencies": {}
