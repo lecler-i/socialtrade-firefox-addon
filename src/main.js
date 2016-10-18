@@ -1,11 +1,5 @@
 import Stately from 'stately.js';
 import $ from "jquery";
-
-$.noConflict();
-window.$ = $;
-
-// import 'bootstrap-switch';
-// import 'bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.css';
 import 'jquery-toggles';
 import 'jquery-toggles/css/toggles-full.css';
 
