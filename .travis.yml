@@ -16,8 +16,6 @@ script:
   - "npm run build"
 
 before_deploy:
-  - "cp manifest.json script.js toggles.css icon.svg build"
-  - "npm run build"
   - "export EXTENSION_ZIP=$(ls web-ext-artifacts/socialtrade*.zip)"
 
   - "npm run publish:chrome"
