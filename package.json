@@ -1,18 +1,30 @@
 {
   "scripts": {
     "test": "echo 'No tests yet :('",
-    "dev": "jpm watchpost",
+    "dev": "webpack --watch",
     "install:bower": "bower install && bower-installer",
-    "build": "web-ext build -s build/",
+    "build": "npm run build:webpack && npm run build:extension",
+    "build:webpack": "webpack",
+    "build:extension": "web-ext build -s build/",
     "publish:firefox": "web-ext sign --api-key ${FIREFOX_API_KEY} --api-secret ${FIREFOX_API_SECRET} -s build/",
-    "publish:chrome": "webstore upload --source $(ls web-ext-artifacts/socialtrade*.zip) --extension-id ${CHROME_APP_ID} --client-id ${CHROME_CLIENT_ID} --client-secret ${CHROME_CLIENT_SECRET} --refresh-token ${CHROME_REFRESH_TOKEN}",
+    "publish:chrome": "webstore upload --auto-publish --source $(ls web-ext-artifacts/socialtrade*.zip) --extension-id ${CHROME_APP_ID} --client-id ${CHROME_CLIENT_ID} --client-secret ${CHROME_CLIENT_SECRET} --refresh-token ${CHROME_REFRESH_TOKEN}",
     "crx:download": "wget \"https://clients2.google.com/service/update2/crx?response=redirect&prodversion=38.0&x=id%3D${CHROME_APP_ID}%26installsource%3Dondemand%26uc\" -O ${EXTENSION_ZIP}.crx"
   },
   "devDependencies": {
-    "bower": "^1.7.9",
-    "bower-installer": "^1.2.0",
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-es2015": "^6.16.0",
+    "babel-preset-stage-0": "^6.16.0",
     "chrome-webstore-upload-cli": "^1.1.0",
-    "web-ext": "^1.5.0"
+    "copy-webpack-plugin": "^3.0.1",
+    "extract-text-webpack-plugin": "^1.0.1",
+    "web-ext": "^1.5.0",
+    "webpack": "^1.13.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap-switch": "^3.3.2",
+    "jquery": "^3.1.1",
+    "jquery-toggles": "^4.0.0",
+    "stately.js": "^1.3.0"
+  }
 }
