@@ -13,6 +13,7 @@ install:
 
 script:
   - "npm test"
+  - "npm run build"
 
 before_deploy:
   - "cp manifest.json script.js toggles.css icon.svg build"
