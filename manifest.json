@@ -3,9 +3,6 @@
   "manifest_version": 2,
   "name": "socialtrade_bot",
   "version": "1.5.0",
-  "background": {
-  "scripts": ["background.js"]
-  },
   "content_scripts": [
     {
       "matches": ["https://socialtrade.biz/*"],

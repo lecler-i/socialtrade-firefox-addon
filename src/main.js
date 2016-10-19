@@ -1,7 +1,13 @@
 import Stately from 'stately.js';
 import $ from "jquery";
+
+$.noConflict();
+window.$ = $;
+
 import 'jquery-toggles';
 import 'jquery-toggles/css/toggles-full.css';
+
+// alert('hello');
 
 $(document).ready(() => {
 	let cmdGetWork = $('#ctl00_ContentPlaceHolder1_cmdGetWork');
@@ -15,6 +21,7 @@ const DIV_SELECTOR = ".home-title > h1";
 
 
 $(DIV_SELECTOR).html('<div class="toggles toggle-light"></div>');
+$(".army_text").html('I LOVE MAMTA AND PREM');
 
 $('.toggles').toggles({
   on: false
